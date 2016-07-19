@@ -78,14 +78,14 @@ typedef struct {
 } stinger_registered_alg;
 
 typedef struct {
-  char * name;		       /* required argument */
+  const char * name;		       /* required argument */
   const char * host;
   int port;
   int is_remote;
   int map_private;
   int64_t data_per_vertex;
-  char * data_description;
-  char ** dependencies;
+  const char * data_description;
+  const char ** dependencies;
   int64_t num_dependencies;
 } stinger_register_alg_params;
 
@@ -151,8 +151,19 @@ typedef struct {
 */
 stinger_registered_alg *
 stinger_register_alg_impl(stinger_register_alg_params params);
+#ifndef __cplusplus
+/*
+This macro allows stinger_register_alg to be called using "keyword args", like so:
+    stinger_register_alg(
+        .name=alg_name,
+        .data_per_vertex=sizeof(int64_t) + sizeof(double),
+        .data_description="dl bc times_found",
+        .host="localhost",
+    );
+Unfortunately this feature is unsupported in g++-4.8 (see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=55606)
+*/
 #define stinger_register_alg(...) stinger_register_alg_impl((stinger_register_alg_params){__VA_ARGS__})
-
+#endif
 /**
 * @brief Request to begin the static initialization phase.
 *

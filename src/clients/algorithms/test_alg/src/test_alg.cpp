@@ -6,7 +6,7 @@ extern "C" {
 }
 
 int
-main(int argc, char *argv[])
+main(int argc, const char *argv[])
 {
   if(argc < 4) {
     printf("too few args");
