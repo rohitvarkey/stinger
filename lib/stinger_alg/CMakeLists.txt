@@ -21,6 +21,7 @@ set(sources
   src/graph_partition.c
   src/hits_centrality.c
   src/modularity.c
+  src/streaming_betweenness.cpp
 )
 set(headers
   inc/adamic_adar.h
@@ -43,6 +44,8 @@ set(headers
   inc/graph_partition.h
   inc/hits_centrality.h
   inc/modularity.h
+  inc/streaming_betweenness.h
+  inc/streaming_algorithm.h
 )
 
 publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_alg")

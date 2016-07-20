@@ -2,6 +2,7 @@ set(sources
 	src/mon_handling.cpp
 	src/send_rcv.cpp
 	src/stinger_alg.cpp
+	src/stinger_alg_client.cpp
 	src/stinger_alg_state.cpp
 	src/stinger_alg_state_c.cpp
 	src/stinger_mon.cpp
@@ -23,6 +24,7 @@ set(headers
 	inc/mon_handling.h
 	inc/send_rcv.h
 	inc/stinger_alg.h
+	inc/stinger_alg_client.h
 	inc/stinger_alg_state.h
 	inc/stinger_alg_state_c.h
 	inc/stinger_mon.h
@@ -45,7 +47,7 @@ set(_protobuf_output_path "--cpp_out=${CMAKE_BINARY_DIR}")
 foreach(file ${proto})
 	get_filename_component(_file_name ${file} NAME_WE)
 	get_filename_component(_abs_file_name ${file} ABSOLUTE)
-	
+
 	add_custom_command(
 		OUTPUT "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.cc" "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.h"
 		COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ${_protobuf_include_path} ${_protobuf_proto_path} ${_protobuf_output_path} ${_abs_file_name}

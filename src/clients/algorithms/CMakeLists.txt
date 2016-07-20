@@ -1,4 +1,4 @@
-add_executable(stinger_betweenness betweenness/src/betweenness.c)
+add_executable(stinger_betweenness betweenness/src/betweenness.cpp)
 target_link_libraries(stinger_betweenness stinger_net stinger_alg)
 
 add_executable(stinger_clustering_coefficients clustering_coefficients/src/clustering.c)
