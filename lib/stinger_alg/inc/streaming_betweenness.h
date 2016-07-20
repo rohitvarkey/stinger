@@ -1,3 +1,6 @@
+#ifndef STINGER_STREAMING_BETWEENNESS_H_
+#define STINGER_STREAMING_BETWEENNESS_H_
+
 #include <stdint.h>
 #include <unistd.h>
 #include <stdbool.h>
@@ -29,3 +32,5 @@ namespace gt {
     };
   }
 }
+
+#endif
