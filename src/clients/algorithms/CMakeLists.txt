@@ -4,7 +4,7 @@ target_link_libraries(stinger_betweenness stinger_net stinger_alg)
 add_executable(stinger_clustering_coefficients clustering_coefficients/src/clustering.cpp)
 target_link_libraries(stinger_clustering_coefficients stinger_net stinger_alg)
 
-add_executable(stinger_kcore kcore/src/kcore.c)
+add_executable(stinger_kcore kcore/src/kcore.cpp)
 target_link_libraries(stinger_kcore stinger_net stinger_alg)
 
 add_executable(stinger_pagerank pagerank/src/pagerank.c)
