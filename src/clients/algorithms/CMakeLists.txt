@@ -7,7 +7,7 @@ target_link_libraries(stinger_clustering_coefficients stinger_net stinger_alg)
 add_executable(stinger_kcore kcore/src/kcore.cpp)
 target_link_libraries(stinger_kcore stinger_net stinger_alg)
 
-add_executable(stinger_pagerank pagerank/src/pagerank.c)
+add_executable(stinger_pagerank pagerank/src/pagerank.cpp)
 target_link_libraries(stinger_pagerank stinger_net stinger_alg)
 
 add_subdirectory(pagerank_updating)

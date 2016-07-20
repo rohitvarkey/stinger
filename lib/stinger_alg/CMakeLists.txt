@@ -24,6 +24,7 @@ set(sources
   src/streaming_betweenness.cpp
   src/streaming_clustering.cpp
   src/streaming_kcore.cpp
+  src/streaming_pagerank.cpp
 )
 set(headers
   inc/adamic_adar.h
@@ -51,6 +52,7 @@ set(headers
   inc/streaming_betweenness.h
   inc/streaming_clustering.h
   inc/streaming_kcore.h
+  inc/streaming_pagerank.h
 )
 
 publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_alg")
