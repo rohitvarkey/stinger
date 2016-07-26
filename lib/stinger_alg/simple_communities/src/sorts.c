@@ -9,8 +9,8 @@
 #include <errno.h>
 #include <assert.h>
 
-#include "compat.h"
-#include "sorts.h"
+#include "../inc/compat.h"
+#include "../inc/sorts.h"
 
 /*
   All integer compares are in increasing order.

@@ -12,11 +12,11 @@
 
 #include "stinger_utils/timer.h"
 
-#include "compat.h"
+#include "../inc/compat.h"
 #include "stinger_core/xmalloc.h"
-#include "sorts.h"
-#include "graph-el.h"
-#include "community.h"
+#include "../inc/sorts.h"
+#include "../inc/graph-el.h"
+#include "../inc/community.h"
 
 #if !defined(NO_SCHED)
 #define SCHED_STATIC " schedule(static)"
@@ -429,7 +429,7 @@ contract_el (int64_t NE, intvtx_t * restrict el /* 3 x oldNE */,
 
   /* fprintf (stderr, "from %ld => %ld\n", old_nv, new_nv); */
 
-  OMP("omp parallel") 
+  OMP("omp parallel")
   {
 #if !defined(NDEBUG)
     OMP("omp for reduction(+:w_in) schedule(static)")
@@ -1243,8 +1243,8 @@ score_heaviest_edge (double * restrict escore,
   CDECL(g);
 
   OMP("omp parallel for")
-    
-  
+
+
     for (int64_t k = 0; k < g.ne; ++k) {
       escore[k] = W(g, k);
       assert (!isnan (escore[k]));
@@ -1267,8 +1267,8 @@ score_conductance (double * restrict escore,
     OMP("omp for schedule(static)")
       for (intvtx_t i = 0; i < nv; ++i)
         extdeg[i] = 0;
-    OMP("omp for schedule(static)") 
-    
+    OMP("omp for schedule(static)")
+
       for (int64_t k = 0; k < ne; ++k) {
         int64_fetch_add (&extdeg[I(g, k)], W(g, k));
         int64_fetch_add (&extdeg[J(g, k)], W(g, k));
@@ -1283,8 +1283,8 @@ score_conductance (double * restrict escore,
         old_conductance[i] = extdeg[i] / (double)v;
       }
 
-    OMP("omp for schedule(static)") 
-    
+    OMP("omp for schedule(static)")
+
       for (int64_t k = 0; k < ne; ++k) {
         const intvtx_t i = I(g, k);
         const intvtx_t j = J(g, k);
@@ -1310,28 +1310,28 @@ score_cnm (double * restrict escore,
 
   OMP("omp parallel") {
     OMP("omp for schedule(static)")
-      
-    
+
+
       for (intvtx_t i = 0; i < nv; ++i)
         alldeg[i] = 0;
 
     OMP("omp for schedule(static)")
-      
-    
+
+
       for (int64_t k = 0; k < ne; ++k) {
         int64_fetch_add (&alldeg[I(g, k)], W(g, k));
         int64_fetch_add (&alldeg[J(g, k)], W(g, k));
       }
 
     OMP("omp for schedule(static)")
-      
-    
+
+
       for (intvtx_t i = 0; i < nv; ++i)
         alldeg[i] += D(g, i);
 
     OMP("omp for schedule(static)")
-      
-    
+
+
       for (int64_t k = 0; k < ne; ++k) {
         const intvtx_t i = I(g, k);
         const intvtx_t j = J(g, k);
@@ -1358,7 +1358,7 @@ score_mb (double * restrict escore,
   /* Treat all edges as the current potential merges, find mean and filter. */
   sum = 0.0;
   OMP("omp parallel") {
-  
+
       OMP("omp for reduction(+:sum) reduction(+:final_ne) schedule(static)")
       for (int64_t k = 0; k < ne; ++k)
         if (escore[k] > 0) {
@@ -1806,7 +1806,7 @@ community (int64_t * c, struct el * restrict g /* destructive */,
         double match_score = 0;
         intvtx_t nmatch = 0;
         OMP("omp parallel for reduction(+:match_score) reduction(+:nmatch)")
-        
+
           for (intvtx_t i = 0; i < old_nv; ++i) {
             if (m[i] >= 0) {
               if (i == I(cg, m[i])) {
@@ -1826,7 +1826,7 @@ community (int64_t * c, struct el * restrict g /* destructive */,
         double edge_sum_score = 0;
         intvtx_t nedge = 0;
         OMP("omp parallel for reduction(+:edge_sum_score) reduction(+:nedge)")
-        
+
           for (intvtx_t ki = 0; ki < old_nv; ++ki) {
             if (m[ki] >= 0) {
               intvtx_t i, j;
@@ -2174,7 +2174,7 @@ update_community (int64_t * restrict cmap_global, const int64_t nv_global,
         double match_score = 0;
         intvtx_t nmatch = 0;
         OMP("omp parallel for reduction(+:match_score) reduction(+:nmatch)")
-        
+
           for (intvtx_t i = 0; i < old_nv; ++i) {
             if (m[i] >= 0) {
               if (i == I(cg, m[i])) {
@@ -2194,7 +2194,7 @@ update_community (int64_t * restrict cmap_global, const int64_t nv_global,
         double edge_sum_score = 0;
         intvtx_t nedge = 0;
         OMP("omp parallel for reduction(+:edge_sum_score) reduction(+:nedge)")
-        
+
           for (intvtx_t ki = 0; ki < old_nv; ++ki) {
             if (m[ki] >= 0) {
               intvtx_t i, j;
@@ -2344,8 +2344,8 @@ eval_conductance_cgraph (const struct el g, int64_t * ws)
 
   OMP("omp parallel") {
     OMP("omp for reduction(+: totv) schedule(static)")
-      
-    
+
+
       for (int64_t i = 0; i < nv; ++i) {
         vol[i] = D(g, i);
         totv += vol[i];
@@ -2353,8 +2353,8 @@ eval_conductance_cgraph (const struct el g, int64_t * ws)
       }
 
     OMP("omp for reduction(+: totv) schedule(static)")
-      
-    
+
+
       for (int64_t k = 0; k < ne; ++k) {
         const int64_t i = I(g, k);
         const int64_t j = J(g, k);
@@ -2368,8 +2368,8 @@ eval_conductance_cgraph (const struct el g, int64_t * ws)
       }
 
     OMP("omp for reduction(+:cond) schedule(static)")
-      
-    
+
+
       for (int64_t i = 0; i < nv; ++i) {
         const double denom = 2*vol[i] > totv? totv - vol[i] : vol[i];
         const double numer = ncut[i];
@@ -2397,16 +2397,16 @@ eval_modularity_cgraph (const struct el g, int64_t * ws)
 
   OMP("omp parallel") {
     OMP("omp for reduction(+: totw) schedule(static)")
-      
-    
+
+
       for (int64_t i = 0; i < nv; ++i) {
         Lsplus[i] = 4*D(g, i);
         totw += 2*D(g, i);
       }
 
     OMP("omp for reduction(+: totw) schedule(static)")
-      
-    
+
+
       for (int64_t k = 0; k < ne; ++k) {
         const int64_t i = I(g, k);
         const int64_t j = J(g, k);
@@ -2418,7 +2418,7 @@ eval_modularity_cgraph (const struct el g, int64_t * ws)
       }
 
     OMP("omp for reduction(+: out) schedule(static)")
-    
+
       for (int64_t i = 0; i < nv; ++i) {
         /* if (i < 20) */
         /*     fprintf (stderr, "%ld: %g %g %g\n", (long)i, */
@@ -2454,7 +2454,7 @@ contract_self_el (int64_t NE, intvtx_t * restrict el /* 3 x oldNE */,
 
   /* fprintf (stderr, "from %ld => %ld\n", old_nv, nv); */
 
-  OMP("omp parallel") 
+  OMP("omp parallel")
   {
 #if !defined(NDEBUG)
     OMP("omp for reduction(+:w_in) schedule(static)")
@@ -2481,7 +2481,7 @@ contract_self_el (int64_t NE, intvtx_t * restrict el /* 3 x oldNE */,
     OMP("omp single") w_out = 0;
 #endif
 
-    OMP("omp for schedule(static)") 
+    OMP("omp for schedule(static)")
       for (int64_t k = 0; k < NE; ++k)
         canonical_order_edge (&Iel(el, k), &Jel(el, k));
 
@@ -2519,7 +2519,7 @@ contract_self_el (int64_t NE, intvtx_t * restrict el /* 3 x oldNE */,
 
     /* int64_t dumped_row = 0; */
     /* Sort then collapse within each row. */
-    OMP("omp for schedule(guided)") 
+    OMP("omp for schedule(guided)")
       for (intvtx_t new_i = 0; new_i < nv; ++new_i) {
         const int64_t new_i_end = count[new_i+1];
         int64_t k, kcur = count[new_i];

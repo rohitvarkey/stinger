@@ -1,6 +1,10 @@
 #if !defined(COMMUNITY_UPDATE_HEADER_)
 #define COMMUNITY_UPDATE_HEADER_
 
+#ifndef restrict
+#define restrict __restrict__
+#endif
+
 #if defined(_OPENMP)
 #include <omp.h>
 #endif
@@ -31,6 +35,10 @@ struct community_state {
   int64_t max_csize;
   double modularity;
 };
+
+double init_cstate_from_stinger (struct community_state *, const struct stinger *);
+double cstate_preproc_alg (struct community_state * restrict cstate,
+                          const stinger_registered_alg * alg);
 
 void finalize_community_state (struct community_state * cstate);
 int cstate_check (struct community_state *cstate);

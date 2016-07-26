@@ -1,6 +1,10 @@
 #if !defined(COMMUNITY_HEADER_)
 #define COMMUNITY_HEADER_
 
+#ifndef restrict
+#define restrict __restrict__
+#endif
+
 #define ALG_HEAVIEST_EDGE 0
 #define ALG_CONDUCTANCE 1
 #define ALG_CNM 2

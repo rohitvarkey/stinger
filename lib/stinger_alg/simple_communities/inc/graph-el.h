@@ -1,6 +1,10 @@
 #if !defined(GRAPH_EL_HEADER_)
 #define GRAPH_EL_HEADER_
 
+#ifndef restrict
+#define restrict __restrict__
+#endif
+
 struct el {
   int64_t nv, ne;
   int64_t nv_orig, ne_orig;

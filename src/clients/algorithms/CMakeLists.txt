@@ -15,7 +15,8 @@ add_subdirectory(pagerank_updating)
 add_executable(stinger_rate_monitor rate_monitor/src/rate_monitor.c)
 target_link_libraries(stinger_rate_monitor stinger_net stinger_alg)
 
-add_subdirectory(simple_communities)
+add_executable(stinger_simple_communities simple_communities/src/simple_communities.cpp)
+target_link_libraries(stinger_simple_communities stinger_net stinger_alg)
 
 add_subdirectory(spmspv_test)
 

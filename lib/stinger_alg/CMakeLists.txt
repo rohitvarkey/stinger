@@ -1,16 +1,7 @@
 set(sources
-  src/adamic_adar.c
-  src/betweenness.c
-  src/bfs.c
-  src/clustering.c
+
+# FIXME move these to subdir
   src/community_on_demand.c
-  src/kcore.c
-  src/pagerank.c
-  src/random.c
-  src/rmat.c
-  src/static_components.c
-  src/weakly_connected_components.c
-  src/streaming_connected_components.c
   src/shortest_paths.cpp
   src/diameter.cpp
   src/independent_sets.c
@@ -21,38 +12,60 @@ set(sources
   src/graph_partition.c
   src/hits_centrality.c
   src/modularity.c
-  src/streaming_betweenness.cpp
-  src/streaming_clustering.cpp
-  src/streaming_kcore.cpp
-  src/streaming_pagerank.cpp
+
+  adamic_adar/src/adamic_adar.c
+  betweenness/src/betweenness.c
+    betweenness/src/streaming_betweenness.cpp
+  bfs/src/bfs.c
+  clustering/src/clustering.c
+    clustering/src/streaming_clustering.cpp
+  kcore/src/kcore.c
+    kcore/src/streaming_kcore.cpp
+  pagerank/src/pagerank.c
+    pagerank/src/streaming_pagerank.cpp
+  random/src/random.c
+  rmat/src/rmat.c
+  simple_communities/src/community.c
+    simple_communities/src/community-update.c
+    simple_communities/src/graph-el.c
+    simple_communities/src/sorts.c
+    simple_communities/src/streaming_simple_communities.cpp
+  static_components/src/static_components.c
+  streaming_connected_components/src/streaming_connected_components.c
+  weakly_connected_components/src/weakly_connected_components.c
 )
+# Don't include all .h files here, just the ones that contain public definitions
 set(headers
-  inc/adamic_adar.h
-  inc/betweenness.h
-  inc/bfs.h
-  inc/clustering.h
+# FIXME move these to subdir
   inc/community_on_demand.h
-  inc/kcore.h
-  inc/pagerank.h
-  inc/random.h
-  inc/rmat.h
-  inc/static_components.h
-  inc/weakly_connected_components.h
-  inc/streaming_connected_components.h
   inc/shortest_paths.h
   inc/diameter.h
   inc/independent_sets.h
   inc/graph_partition.h
   inc/hits_centrality.h
-  inc/graph_partition.h
-  inc/hits_centrality.h
   inc/modularity.h
-  inc/streaming_betweenness.h
-  inc/streaming_algorithm.h
-  inc/streaming_betweenness.h
-  inc/streaming_clustering.h
-  inc/streaming_kcore.h
-  inc/streaming_pagerank.h
+
+  adamic_adar/inc/adamic_adar.h
+  betweenness/inc/betweenness.h
+    betweenness/inc/streaming_betweenness.h
+  bfs/inc/bfs.h
+  clustering/inc/clustering.h
+    clustering/inc/streaming_clustering.h
+  kcore/inc/kcore.h
+    kcore/inc/streaming_kcore.h
+  pagerank/inc/pagerank.h
+    pagerank/inc/streaming_pagerank.h
+  random/inc/random.h
+  rmat/inc/rmat.h
+  simple_communities/inc/community.h
+    simple_communities/inc/defs.h
+    simple_communities/inc/graph-el.h
+    simple_communities/inc/community-update.h
+    simple_communities/inc/streaming_simple_communities.h
+  static_components/inc/static_components.h
+  streaming_connected_components/inc/streaming_connected_components.h
+  weakly_connected_components/inc/weakly_connected_components.h
+  common/inc/streaming_algorithm.h
 )
 
 publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_alg")
@@ -65,3 +78,4 @@ include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
 set_source_files_properties(${config} PROPERTIES GENERATED TRUE)
 add_library(stinger_alg SHARED ${sources} ${headers} ${config})
 target_link_libraries(stinger_alg stinger_core stinger_net stinger_utils compat)
+#target_include_directories(stinger_alg PRIVATE simple_communities/inc)

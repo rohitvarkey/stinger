@@ -13,13 +13,13 @@
 #include "stinger_net/stinger_alg.h"
 #include "stinger_utils/timer.h"
 
-#include "compat.h"
-#include "sorts.h"
-#include "graph-el.h"
-#include "community.h"
-#include "bsutil.h"
+#include "../inc/compat.h"
+#include "../inc/sorts.h"
+#include "../inc/graph-el.h"
+#include "../inc/community.h"
+#include "../inc/bsutil.h"
 
-#include "community-update.h"
+#include "../inc/community-update.h"
 
 static void update_el (struct el * el,
                        int64_t * cmap,
@@ -62,7 +62,7 @@ init_community_state (struct community_state * cstate,
   cstate->lockspace = xmalloc (graph_nv * sizeof (*cstate->lockspace));
 #endif
   OMP("omp parallel") {
-    OMP("omp for nowait") 
+    OMP("omp for nowait")
       for (int64_t k = 0; k < graph_nv; ++k) {
         cstate->cmap[k] = k;
         cstate->csize[k] = 1;
@@ -142,7 +142,7 @@ cstate_check (struct community_state *cstate)
   const struct el el = cstate->cg;
   CDECL(el);
   OMP("omp parallel") {
-  OMP("omp for nowait") 
+  OMP("omp for nowait")
     for (int64_t k = 0; k < ne; ++k) {
       //fprintf (stderr, "%ld:  %ld %ld ; %ld\n", (long)k, (long)I(el,k), (long)J(el,k), (long)W(el,k));
       assert (I(el, k) < nv);
@@ -150,7 +150,7 @@ cstate_check (struct community_state *cstate)
       assert (I(el, k) >= 0);
       assert (J(el, k) >= 0);
     }
-  OMP("omp for") 
+  OMP("omp for")
     for (int64_t k = 0; k < graph_nv; ++k) {
       assert (csize[k] > 0);
     }
@@ -318,7 +318,7 @@ qflush (struct insqueue * restrict q,
 #endif /* NO_QUEUE */
 }
 
- 
+
 void
 enqueue (struct insqueue * restrict q,
          intvtx_t i, intvtx_t j, intvtx_t w,
@@ -358,7 +358,7 @@ enqueue (struct insqueue * restrict q,
 #endif
 }
 
- 
+
 static inline void
 extract_vertex (const int64_t v, const int64_t cv, const struct stinger * restrict S,
                 int64_t * restrict mark,
@@ -393,7 +393,7 @@ extract_vertices (const int64_t nvlist, const int64_t * restrict vlist, const in
                   int64_t * restrict mark,
                   int64_t * restrict ncomm, int64_t * restrict csize)
 {
-  OMP("omp parallel for schedule(guided)") 
+  OMP("omp parallel for schedule(guided)")
     for (int64_t k = 0; k < nvlist; ++k) {
       assert (vlist[k] >= 0);
       extract_vertex (vlist[k], cmap[vlist[k]], S, mark, ncomm, csize);
@@ -436,7 +436,7 @@ extract_edges (const int64_t nvlist, const int64_t * restrict vlist, const int64
     q.n = 0;
 
     OMP("omp for reduction(+: n_new_edges)")
-      
+
       for (int64_t k = 0; k < nvlist; ++k) {
         const int64_t i = vlist[k];
         const int64_t ci = cmap[i];
@@ -499,7 +499,7 @@ extract_edges (const int64_t nvlist, const int64_t * restrict vlist, const int64
     }
 
     OMP("omp for")
-      
+
       for (int64_t k = 0; k < nvlist; ++k) {
         const int64_t i = vlist[k];
         const int64_t ci = cmap[i];
@@ -548,7 +548,7 @@ commit_cmap_change (const int64_t nvlist, const int64_t * restrict vlist,
                     int64_t * restrict cmap,
                     int64_t * restrict mark)
 {
-  OMP("omp parallel for") 
+  OMP("omp parallel for")
     for (int64_t k = 0; k < nvlist; ++k) {
       const int64_t i = vlist[k];
       if (mark[i] >= 0) {
@@ -634,7 +634,7 @@ update_el (struct el * el,
   contract_self (el, *ws);
 }
 
- 
+
 static inline int
 append_to_vlist (int64_t * restrict nvlist,
                  int64_t * restrict vlist,

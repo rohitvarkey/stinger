@@ -18,11 +18,11 @@
 #include <fcntl.h>
 #include <getopt.h>
 
-#include "compat.h"
+#include "../inc/compat.h"
 #include "stinger_core/xmalloc.h"
-#include "graph-el.h"
+#include "../inc/graph-el.h"
 
-#include "bsutil.h"
+#include "../inc/bsutil.h"
 
 int use_file_allocation = 0;
 
