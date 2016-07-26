@@ -18,6 +18,10 @@ target_link_libraries(stinger_rate_monitor stinger_net stinger_alg)
 add_executable(stinger_simple_communities simple_communities/src/simple_communities.cpp)
 target_link_libraries(stinger_simple_communities stinger_net stinger_alg)
 
+add_executable(stinger_simple_communities_updating simple_communities/src/simple_communities_updating.cpp)
+target_link_libraries(stinger_simple_communities_updating stinger_net stinger_alg)
+
+
 add_subdirectory(spmspv_test)
 
 add_executable(stinger_static_components static_components/src/static_components.c)

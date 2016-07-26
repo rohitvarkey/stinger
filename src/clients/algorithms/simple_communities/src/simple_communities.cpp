@@ -12,7 +12,6 @@ using namespace gt::stinger;
 int
 main(int argc, char *argv[])
 {
-  // FIXME make another exe for non-streaming communities
   StreamingSimpleCommunities alg;
   run_alg_as_client(alg);
   return 0;

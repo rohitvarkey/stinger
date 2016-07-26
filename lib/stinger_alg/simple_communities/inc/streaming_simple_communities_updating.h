@@ -4,14 +4,24 @@
 #include <stdint.h>
 #include "stinger_net/stinger_alg.h"
 #include "streaming_algorithm.h"
+extern "C" {
+#include "defs.h"
+#include "graph-el.h"
+#include "community.h"
+#include "community-update.h"
+}
 namespace gt {
   namespace stinger {
-    class StreamingSimpleCommunitiesUpdate : public IStreamingAlgorithm
+    class StreamingSimpleCommunitiesUpdating : public IStreamingAlgorithm
     {
     private:
+        int64_t iter;
+        int64_t nv;
+        int initial_compute;
         community_state cstate;
         int64_t * restrict cmap;
     public:
+        StreamingSimpleCommunitiesUpdating(int initial_compute);
         // Overridden from IStreamingAlgorithm
         std::string getName();
         int64_t getDataPerVertex();

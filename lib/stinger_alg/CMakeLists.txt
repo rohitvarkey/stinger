@@ -30,6 +30,7 @@ set(sources
     simple_communities/src/graph-el.c
     simple_communities/src/sorts.c
     simple_communities/src/streaming_simple_communities.cpp
+    simple_communities/src/streaming_simple_communities_updating.cpp
   static_components/src/static_components.c
   streaming_connected_components/src/streaming_connected_components.c
   weakly_connected_components/src/weakly_connected_components.c
@@ -62,6 +63,7 @@ set(headers
     simple_communities/inc/graph-el.h
     simple_communities/inc/community-update.h
     simple_communities/inc/streaming_simple_communities.h
+    simple_communities/inc/streaming_simple_communities_updating.h
   static_components/inc/static_components.h
   streaming_connected_components/inc/streaming_connected_components.h
   weakly_connected_components/inc/weakly_connected_components.h
