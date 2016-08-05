@@ -24,7 +24,7 @@ main(int argc, char *argv[])
     }
   }
 
-  StreamingSimpleCommunitiesUpdating alg(initial_compute);
+  SimpleCommunitiesUpdating alg(initial_compute);
   run_alg_as_client(alg);
   return 0;
 }

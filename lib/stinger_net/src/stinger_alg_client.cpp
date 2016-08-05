@@ -3,7 +3,7 @@
 #include <vector>
 
 void
-gt::stinger::run_alg_as_client(IStreamingAlgorithm &alg)
+gt::stinger::run_alg_as_client(IDynamicGraphAlgorithm &alg)
 {
 	LOG_V_A("Starting %s...", alg.getName().c_str());
 	// FIXME Allow uncommon params to be set somehow

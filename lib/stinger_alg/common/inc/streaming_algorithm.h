@@ -1,12 +1,12 @@
-#ifndef STINGER_STREAMING_ALGORITHM_H_
-#define STINGER_STREAMING_ALGORITHM_H_
+#ifndef STINGER_DYNAMIC_GRAPH_ALGORITHM_H_
+#define STINGER_DYNAMIC_GRAPH_ALGORITHM_H_
 
 #include <string>
 #include <stdint.h>
 #include <stinger_net/stinger_alg.h>
 namespace gt {
   namespace stinger {
-    class IStreamingAlgorithm
+    class IDynamicGraphAlgorithm
     {
     public:
         // Return the name of the algorithm

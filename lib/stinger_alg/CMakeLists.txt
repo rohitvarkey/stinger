@@ -15,22 +15,22 @@ set(sources
 
   adamic_adar/src/adamic_adar.c
   betweenness/src/betweenness.c
-    betweenness/src/streaming_betweenness.cpp
+        betweenness/src/dynamic_betweenness.cpp
   bfs/src/bfs.c
   clustering/src/clustering.c
-    clustering/src/streaming_clustering.cpp
+        clustering/src/dynamic_clustering.cpp
   kcore/src/kcore.c
-    kcore/src/streaming_kcore.cpp
+        kcore/src/dynamic_kcore.cpp
   pagerank/src/pagerank.c
-    pagerank/src/streaming_pagerank.cpp
+        pagerank/src/dynamic_pagerank.cpp
   random/src/random.c
   rmat/src/rmat.c
   simple_communities/src/community.c
     simple_communities/src/community-update.c
     simple_communities/src/graph-el.c
     simple_communities/src/sorts.c
-    simple_communities/src/streaming_simple_communities.cpp
-    simple_communities/src/streaming_simple_communities_updating.cpp
+        simple_communities/src/dynamic_simple_communities.cpp
+        simple_communities/src/dynamic_simple_communities_updating.cpp
   static_components/src/static_components.c
   streaming_connected_components/src/streaming_connected_components.c
   weakly_connected_components/src/weakly_connected_components.c
@@ -48,22 +48,22 @@ set(headers
 
   adamic_adar/inc/adamic_adar.h
   betweenness/inc/betweenness.h
-    betweenness/inc/streaming_betweenness.h
+        betweenness/inc/dynamic_betweenness.h
   bfs/inc/bfs.h
   clustering/inc/clustering.h
-    clustering/inc/streaming_clustering.h
+        clustering/inc/dynamic_clustering.h
   kcore/inc/kcore.h
-    kcore/inc/streaming_kcore.h
+        kcore/inc/dynamic_kcore.h
   pagerank/inc/pagerank.h
-    pagerank/inc/streaming_pagerank.h
+        pagerank/inc/dynamic_pagerank.h
   random/inc/random.h
   rmat/inc/rmat.h
   simple_communities/inc/community.h
     simple_communities/inc/defs.h
     simple_communities/inc/graph-el.h
     simple_communities/inc/community-update.h
-    simple_communities/inc/streaming_simple_communities.h
-    simple_communities/inc/streaming_simple_communities_updating.h
+        simple_communities/inc/dynamic_simple_communities.h
+        simple_communities/inc/dynamic_simple_communities_updating.h
   static_components/inc/static_components.h
   streaming_connected_components/inc/streaming_connected_components.h
   weakly_connected_components/inc/weakly_connected_components.h

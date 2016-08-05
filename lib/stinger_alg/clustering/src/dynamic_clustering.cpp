@@ -9,23 +9,23 @@
 extern "C" {
 #include "stinger_alg/clustering.h"
 }
-#include "streaming_clustering.h"
+#include "dynamic_clustering.h"
 
 using namespace gt::stinger;
 
 std::string
-StreamingClusteringCoefficients::getName() { return "clustering_coeff"; }
+ClusteringCoefficients::getName() { return "clustering_coeff"; }
 
 int64_t
-StreamingClusteringCoefficients::getDataPerVertex() { return sizeof(double) + sizeof(int64_t); }
+ClusteringCoefficients::getDataPerVertex() { return sizeof(double) + sizeof(int64_t); }
 
 std::string
-StreamingClusteringCoefficients::getDataDescription() { return "dl coeff ntriangles"; }
+ClusteringCoefficients::getDataDescription() { return "dl coeff ntriangles"; }
 
-StreamingClusteringCoefficients::StreamingClusteringCoefficients() { init_timer(); }
+ClusteringCoefficients::ClusteringCoefficients() { init_timer(); }
 
 void
-StreamingClusteringCoefficients::onInit(stinger_registered_alg * alg)
+ClusteringCoefficients::onInit(stinger_registered_alg * alg)
 {
     local_cc = (double *)alg->alg_data;
     ntri = (int64_t *)(((double *)alg->alg_data) + alg->stinger->max_nv);
@@ -47,7 +47,7 @@ StreamingClusteringCoefficients::onInit(stinger_registered_alg * alg)
 }
 
 void
-StreamingClusteringCoefficients::onPre(stinger_registered_alg * alg)
+ClusteringCoefficients::onPre(stinger_registered_alg * alg)
 {
     tic();
 
@@ -97,7 +97,7 @@ StreamingClusteringCoefficients::onPre(stinger_registered_alg * alg)
 }
 
 void
-StreamingClusteringCoefficients::onPost(stinger_registered_alg * alg)
+ClusteringCoefficients::onPost(stinger_registered_alg * alg)
 {
     tic();
 
@@ -116,7 +116,7 @@ StreamingClusteringCoefficients::onPost(stinger_registered_alg * alg)
     LOG_I_A("Time: %f", time);
 }
 
-StreamingClusteringCoefficients::~StreamingClusteringCoefficients()
+ClusteringCoefficients::~ClusteringCoefficients()
 {
     xfree(affected);
 }

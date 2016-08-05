@@ -1,5 +1,5 @@
-#ifndef STINGER_STREAMING_CLUSTERING_H_
-#define STINGER_STREAMING_CLUSTERING_H_
+#ifndef STINGER_DYNAMIC_CLUSTERING_H_
+#define STINGER_DYNAMIC_CLUSTERING_H_
 
 #include <stdint.h>
 #include <string>
@@ -14,17 +14,17 @@
 
 namespace gt {
   namespace stinger {
-    class StreamingClusteringCoefficients : public IStreamingAlgorithm
+    class ClusteringCoefficients : public IDynamicGraphAlgorithm
     {
     private:
       double * local_cc;
       int64_t * ntri;
       int64_t * affected;
     public:
-        StreamingClusteringCoefficients();
-        ~StreamingClusteringCoefficients();
+        ClusteringCoefficients();
+        ~ClusteringCoefficients();
 
-        // Overridden from IStreamingAlgorithm
+        // Overridden from IDynamicGraphAlgorithm
         std::string getName();
         int64_t getDataPerVertex();
         std::string getDataDescription();

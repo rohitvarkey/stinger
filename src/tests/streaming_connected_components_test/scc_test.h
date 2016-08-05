@@ -1,5 +1,5 @@
-#ifndef STINGER_STREAMING_CONNECTED_COMPONENTS_TEST_H_
-#define STINGER_STREAMING_CONNECTED_COMPONENTS_TEST_H_
+#ifndef STINGER_DYNAMIC_CONNECTED_COMPONENTS_TEST_H_
+#define STINGER_DYNAMIC_CONNECTED_COMPONENTS_TEST_H_
 
 extern "C" {
   #include "stinger_alg/streaming_connected_components.h"
@@ -11,4 +11,4 @@ extern "C" {
 #include "gtest/gtest.h"
 
 
-#endif /* STINGER_STREAMING_CONNECTED_COMPONENTS_TEST_H_ */
+#endif /* STINGER_DYNAMIC_CONNECTED_COMPONENTS_TEST_H_ */

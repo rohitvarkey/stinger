@@ -10,20 +10,20 @@
 extern "C" {
 #include "stinger_alg/pagerank.h"
 }
-#include "streaming_pagerank.h"
+#include "dynamic_pagerank.h"
 
 using namespace gt::stinger;
 
 std::string
-StreamingPagerank::getName() { return "pagerank"; }
+PageRank::getName() { return "pagerank"; }
 
 int64_t
-StreamingPagerank::getDataPerVertex() { return sizeof(double); }
+PageRank::getDataPerVertex() { return sizeof(double); }
 
 std::string
-StreamingPagerank::getDataDescription() { return "d pagerank"; }
+PageRank::getDataDescription() { return "d pagerank"; }
 
-StreamingPagerank::StreamingPagerank(
+PageRank::PageRank(
     const char * type_str,
     int type_specified,
     int directed,
@@ -40,7 +40,7 @@ StreamingPagerank::StreamingPagerank(
 }
 
 void
-StreamingPagerank::onInit(stinger_registered_alg * alg)
+PageRank::onInit(stinger_registered_alg * alg)
 {
     pr = (double *)alg->alg_data;
     OMP("omp parallel for")
@@ -62,13 +62,13 @@ StreamingPagerank::onInit(stinger_registered_alg * alg)
 }
 
 void
-StreamingPagerank::onPre(stinger_registered_alg * alg)
+PageRank::onPre(stinger_registered_alg * alg)
 {
     /* nothing to do */
 }
 
 void
-StreamingPagerank::onPost(stinger_registered_alg * alg)
+PageRank::onPost(stinger_registered_alg * alg)
 {
     int64_t type = -1;
     if(type_specified) {
@@ -88,7 +88,7 @@ StreamingPagerank::onPost(stinger_registered_alg * alg)
     }
 }
 
-StreamingPagerank::~StreamingPagerank()
+PageRank::~PageRank()
 {
     xfree(tmp_pr);
 }

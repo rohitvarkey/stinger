@@ -72,7 +72,7 @@ main(int argc, char *argv[])
     }
 
     // Run the algorithm, updating with each new batch
-    StreamingBetweenness alg(num_samples, weighting, do_weighted);
+    BetweennessCentrality alg(num_samples, weighting, do_weighted);
     run_alg_as_client(alg);
 
     return 0;

@@ -7,18 +7,18 @@
 extern "C" {
 #include "stinger_alg/kcore.h"
 }
-#include "streaming_kcore.h"
+#include "dynamic_kcore.h"
 
 using namespace gt::stinger;
 
 std::string
-StreamingKCore::getName() { return "kcore"; }
+KCore::getName() { return "kcore"; }
 
 int64_t
-StreamingKCore::getDataPerVertex() { return 2*sizeof(int64_t); }
+KCore::getDataPerVertex() { return 2*sizeof(int64_t); }
 
 std::string
-StreamingKCore::getDataDescription()
+KCore::getDataDescription()
 {
     return "ll kcore size\n"
       "  kcore - a label per vertex, the k of the largest core in which that vertex belongs\n"
@@ -30,7 +30,7 @@ StreamingKCore::getDataDescription()
 }
 
 void
-StreamingKCore::onInit(stinger_registered_alg * alg)
+KCore::onInit(stinger_registered_alg * alg)
 {
     int64_t k;
     kcore = (int64_t *)alg->alg_data;
@@ -42,13 +42,13 @@ StreamingKCore::onInit(stinger_registered_alg * alg)
 }
 
 void
-StreamingKCore::onPre(stinger_registered_alg * alg)
+KCore::onPre(stinger_registered_alg * alg)
 {
     /* nothing to do */
 }
 
 void
-StreamingKCore::onPost(stinger_registered_alg * alg)
+KCore::onPost(stinger_registered_alg * alg)
 {
     int64_t k;
     LOG_I("Kcore post starting");

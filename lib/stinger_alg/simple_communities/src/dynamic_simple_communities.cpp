@@ -4,7 +4,7 @@
 #include "stinger_core/xmalloc.h"
 #include "stinger_core/stinger_error.h"
 #include "stinger_net/stinger_alg.h"
-#include "streaming_simple_communities.h"
+#include "dynamic_simple_communities.h"
 
 using namespace gt::stinger;
 
@@ -15,16 +15,16 @@ using namespace gt::stinger;
   } while (0)
 
 std::string
-StreamingSimpleCommunities::getName() { return "simple_communities"; }
+SimpleCommunities::getName() { return "simple_communities"; }
 
 int64_t
-StreamingSimpleCommunities::getDataPerVertex() { return sizeof(int64_t); }
+SimpleCommunities::getDataPerVertex() { return sizeof(int64_t); }
 
 std::string
-StreamingSimpleCommunities::getDataDescription() { return "l community_label"; }
+SimpleCommunities::getDataDescription() { return "l community_label"; }
 
 void
-StreamingSimpleCommunities::onInit(stinger_registered_alg * alg)
+SimpleCommunities::onInit(stinger_registered_alg * alg)
 {
   iter = 0;
   cmap = (int64_t *)alg->alg_data;
@@ -36,13 +36,13 @@ StreamingSimpleCommunities::onInit(stinger_registered_alg * alg)
 }
 
 void
-StreamingSimpleCommunities::onPre(stinger_registered_alg * alg)
+SimpleCommunities::onPre(stinger_registered_alg * alg)
 {
     /* nothing to do */
 }
 
 void
-StreamingSimpleCommunities::onPost(stinger_registered_alg * alg)
+SimpleCommunities::onPost(stinger_registered_alg * alg)
 {
   ++iter;
   const struct stinger * S = alg->stinger;

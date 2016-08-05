@@ -1,5 +1,5 @@
-#ifndef STINGER_STREAMING_SIMPLE_COMMUNITIES_H_
-#define STINGER_STREAMING_SIMPLE_COMMUNITIES_H_
+#ifndef STINGER_DYNAMIC_SIMPLE_COMMUNITIES_UPDATE_H_
+#define STINGER_DYNAMIC_SIMPLE_COMMUNITIES_UPDATE_H_
 
 #include <stdint.h>
 #include "stinger_net/stinger_alg.h"
@@ -12,14 +12,17 @@ extern "C" {
 }
 namespace gt {
   namespace stinger {
-    class StreamingSimpleCommunities : public IStreamingAlgorithm
+    class SimpleCommunitiesUpdating : public IDynamicGraphAlgorithm
     {
     private:
         int64_t iter;
+        int64_t nv;
+        int initial_compute;
         community_state cstate;
-        int64_t * __restrict__ cmap;
+        int64_t * restrict cmap;
     public:
-        // Overridden from IStreamingAlgorithm
+        SimpleCommunitiesUpdating(int initial_compute);
+        // Overridden from IDynamicGraphAlgorithm
         std::string getName();
         int64_t getDataPerVertex();
         std::string getDataDescription();

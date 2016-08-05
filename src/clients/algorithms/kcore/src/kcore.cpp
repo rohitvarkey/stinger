@@ -13,6 +13,6 @@ using namespace gt::stinger;
 int
 main(int argc, char *argv[])
 {
-    StreamingKCore alg;
+    KCore alg;
     run_alg_as_client(alg);
 }

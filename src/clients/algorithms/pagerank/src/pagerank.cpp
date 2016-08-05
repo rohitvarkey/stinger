@@ -65,7 +65,7 @@ main(int argc, char *argv[])
     }
   }
 
-  StreamingPagerank alg(
+  PageRank alg(
     type_str,
     type_specified,
     directed,

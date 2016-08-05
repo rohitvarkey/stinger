@@ -4,7 +4,7 @@
 #include "stinger_core/xmalloc.h"
 #include "stinger_core/stinger_error.h"
 #include "stinger_net/stinger_alg.h"
-#include "streaming_simple_communities_updating.h"
+#include "dynamic_simple_communities_updating.h"
 
 using namespace gt::stinger;
 
@@ -15,21 +15,21 @@ using namespace gt::stinger;
   } while (0)
 
 std::string
-StreamingSimpleCommunitiesUpdating::getName() { return "simple_communities_updating"; }
+SimpleCommunitiesUpdating::getName() { return "simple_communities_updating"; }
 
 int64_t
-StreamingSimpleCommunitiesUpdating::getDataPerVertex() { return sizeof(int64_t); }
+SimpleCommunitiesUpdating::getDataPerVertex() { return sizeof(int64_t); }
 
 std::string
-StreamingSimpleCommunitiesUpdating::getDataDescription() { return "l community_label"; }
+SimpleCommunitiesUpdating::getDataDescription() { return "l community_label"; }
 
-StreamingSimpleCommunitiesUpdating::StreamingSimpleCommunitiesUpdating(int initial_compute)
+SimpleCommunitiesUpdating::SimpleCommunitiesUpdating(int initial_compute)
 {
   this->initial_compute = initial_compute;
 }
 
 void
-StreamingSimpleCommunitiesUpdating::onInit(stinger_registered_alg * alg)
+SimpleCommunitiesUpdating::onInit(stinger_registered_alg * alg)
 {
   iter = 0;
   cmap = (int64_t *)alg->alg_data;
@@ -45,14 +45,14 @@ StreamingSimpleCommunitiesUpdating::onInit(stinger_registered_alg * alg)
 }
 
 void
-StreamingSimpleCommunitiesUpdating::onPre(stinger_registered_alg * alg)
+SimpleCommunitiesUpdating::onPre(stinger_registered_alg * alg)
 {
   /* Must be here to find the removal weights. */
   cstate_preproc_alg (&cstate, alg);
 }
 
 void
-StreamingSimpleCommunitiesUpdating::onPost(stinger_registered_alg * alg)
+SimpleCommunitiesUpdating::onPost(stinger_registered_alg * alg)
 {
   ++iter;
   cstate_update (&cstate, alg->stinger);

@@ -1,5 +1,5 @@
-#ifndef STINGER_STREAMING_BETWEENNESS_H_
-#define STINGER_STREAMING_BETWEENNESS_H_
+#ifndef STINGER_DYNAMIC_BETWEENNESS_H_
+#define STINGER_DYNAMIC_BETWEENNESS_H_
 
 #include <stdint.h>
 #include <unistd.h>
@@ -8,7 +8,7 @@
 #include "streaming_algorithm.h"
 namespace gt {
   namespace stinger {
-    class StreamingBetweenness : public IStreamingAlgorithm
+    class BetweennessCentrality : public IDynamicGraphAlgorithm
     {
     private:
         double * bc;
@@ -19,10 +19,10 @@ namespace gt {
         uint8_t do_weighted;
         double old_weighting;
     public:
-        StreamingBetweenness(int64_t num_samples, double weighting, uint8_t do_weighted);
-        ~StreamingBetweenness();
+        BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted);
+        ~BetweennessCentrality();
 
-        // Overridden from IStreamingAlgorithm
+        // Overridden from IDynamicGraphAlgorithm
         std::string getName();
         int64_t getDataPerVertex();
         std::string getDataDescription();

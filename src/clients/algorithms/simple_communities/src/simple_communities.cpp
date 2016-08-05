@@ -12,7 +12,7 @@ using namespace gt::stinger;
 int
 main(int argc, char *argv[])
 {
-  StreamingSimpleCommunities alg;
+  SimpleCommunities alg;
   run_alg_as_client(alg);
   return 0;
 }

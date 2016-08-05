@@ -5,7 +5,7 @@
 
 namespace gt {
   namespace stinger {
-    void run_alg_as_client(IStreamingAlgorithm &alg);
+    void run_alg_as_client(IDynamicGraphAlgorithm &alg);
   }
 }
 

@@ -1,5 +1,5 @@
-#ifndef STINGER_STREAMING_PAGERANK_H_
-#define STINGER_STREAMING_PAGERANK_H_
+#ifndef STINGER_DYNAMIC_PAGERANK_H_
+#define STINGER_DYNAMIC_PAGERANK_H_
 
 #include <stdint.h>
 #include <unistd.h>
@@ -8,7 +8,7 @@
 #include "streaming_algorithm.h"
 namespace gt {
   namespace stinger {
-    class StreamingPagerank : public IStreamingAlgorithm
+    class PageRank : public IDynamicGraphAlgorithm
     {
     private:
         const char *type_str;
@@ -21,7 +21,7 @@ namespace gt {
         double * pr;
         double * tmp_pr;
     public:
-        StreamingPagerank(
+        PageRank(
           const char * type_str,
           int type_specified,
           int directed,
@@ -29,9 +29,9 @@ namespace gt {
           double dampingfactor,
           int64_t maxiter);
 
-        ~StreamingPagerank();
+        ~PageRank();
 
-        // Overridden from IStreamingAlgorithm
+        // Overridden from IDynamicGraphAlgorithm
         std::string getName();
         int64_t getDataPerVertex();
         std::string getDataDescription();
