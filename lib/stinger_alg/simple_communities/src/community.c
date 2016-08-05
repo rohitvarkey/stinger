@@ -1611,7 +1611,7 @@ community (int64_t * c, struct el * restrict g /* destructive */,
 
   dump_fmt = getenv ("DUMP_FMT");
 
-  assert (wslen > 3*nv_orig + ne_orig);
+  assert (wslen >= 3*nv_orig + ne_orig);
   m = ws;
   rowstart = &m[nv_orig];
   rowend = &rowstart[nv_orig];
@@ -1623,7 +1623,7 @@ community (int64_t * c, struct el * restrict g /* destructive */,
     wslen -= nv_orig;
     ws_inner = &ws_inner[nv_orig];
   }
-  assert (wslen > nv_orig+1 + 2*ne_orig);
+  assert (wslen >= nv_orig+1 + 2*ne_orig);
   if (max_nsteps < 0) max_nsteps = nv_orig;
   if (maxnum < 2) maxnum = 2;
 
@@ -1990,7 +1990,7 @@ update_community (int64_t * restrict cmap_global, const int64_t nv_global,
 
   dump_fmt = getenv ("DUMP_FMT");
 
-  assert (wslen > 4*nv_orig + ne_orig);
+  assert (wslen >= 4*nv_orig + ne_orig);
   c = ws;
   m = &c[nv_orig];
   rowstart = &m[nv_orig];
@@ -1998,7 +1998,7 @@ update_community (int64_t * restrict cmap_global, const int64_t nv_global,
   score = (double*)&rowend[nv_orig];
   ws_inner = (int64_t*)&score[ne_orig];
   wslen -= 4*nv_orig+ne_orig;
-  assert (wslen > nv_orig + ne_orig);
+  assert (wslen >= nv_orig + ne_orig);
   if (max_nsteps < 0) max_nsteps = nv_orig;
   if (maxnum < 2) maxnum = 2;
 
