@@ -83,7 +83,7 @@ if (${PROTOBUF_FOUND})
 else ()
   ExternalProject_Add(protobuf
     PREFIX              ${CMAKE_BINARY_DIR}/external
-    URL                 file://${CMAKE_SOURCE_DIR}/external/protobuf-cpp-3.1.0.tar.gz
+    URL                 file://${CMAKE_CURRENT_SOURCE_DIR}/external/protobuf-cpp-3.1.0.tar.gz
     UPDATE_COMMAND      ""
     PATCH_COMMAND       ""
     CONFIGURE_COMMAND   CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} ${CMAKE_BINARY_DIR}/external/src/protobuf/configure
@@ -108,7 +108,7 @@ endif()
 #libconfig
 ExternalProject_Add(libconfig
   PREFIX              ${CMAKE_BINARY_DIR}/external
-  URL                 file://${CMAKE_SOURCE_DIR}/external/libconfig-1.5.tar.gz
+  URL                 file://${CMAKE_CURRENT_SOURCE_DIR}/external/libconfig-1.5.tar.gz
   URL_MD5             a939c4990d74e6fc1ee62be05716f633
   UPDATE_COMMAND      ""
   PATCH_COMMAND       ""
@@ -136,8 +136,8 @@ set(STINGER_DEFAULT_NEB_FACTOR "4" CACHE STRING "Default number of edge blocks p
 set(STINGER_EDGEBLOCKSIZE "14" CACHE STRING "Number of edges per edge block")
 set(STINGER_NAME_STR_MAX "255" CACHE STRING "Max string length in physmap")
 
-configure_file(${CMAKE_SOURCE_DIR}/lib/stinger_core/inc/stinger_defs.h.in ${CMAKE_BINARY_DIR}/include/stinger_core/stinger_defs.h @ONLY)
-configure_file(${CMAKE_SOURCE_DIR}/lib/stinger_core/inc/stinger_names.h.in ${CMAKE_BINARY_DIR}/include/stinger_core/stinger_names.h @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/lib/stinger_core/inc/stinger_defs.h.in ${CMAKE_BINARY_DIR}/include/stinger_core/stinger_defs.h @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/lib/stinger_core/inc/stinger_names.h.in ${CMAKE_BINARY_DIR}/include/stinger_core/stinger_names.h @ONLY)
 
 # Define a custom function for copying headers to the build directory
 function(publish_headers header_list destination)
@@ -159,7 +159,7 @@ function(publish_headers header_list destination)
 endfunction()
 
 include_directories("${CMAKE_BINARY_DIR}/include")
-include_directories("${CMAKE_SOURCE_DIR}/external/googletest/include/")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/external/googletest/include/")
 
 add_subdirectory(external/googletest)
 add_subdirectory(lib)
@@ -182,8 +182,8 @@ add_test(StingerShortestPathsTest ${CMAKE_BINARY_DIR}/bin/stinger_shortest_paths
 find_program(BASH bash REQUIRED)
 add_test(
   NAME ClientServerTest
-  COMMAND ${BASH} "${CMAKE_SOURCE_DIR}/src/tests/client_server_test/client_server_test.sh" "${CMAKE_BINARY_DIR}" "${STINGER_USE_TCP}"
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/util/
+  COMMAND ${BASH} "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/client_server_test/client_server_test.sh" "${CMAKE_BINARY_DIR}" "${STINGER_USE_TCP}"
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/util/
 )
 
 add_custom_target(check

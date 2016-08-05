@@ -37,12 +37,12 @@ set(headers
 )
 
 set(_protobuf_proto_path "--proto_path=${CMAKE_CURRENT_LIST_DIR}")
-set(_protobuf_include_path "-I=${CMAKE_SOURCE_DIR}/lib")
+set(_protobuf_include_path "-I=${CMAKE_SOURCE_DIR}/lib/stinger/lib")
 set(_protobuf_output_path "--cpp_out=${CMAKE_BINARY_DIR}")
 
-#message("Protobuf protopath: ${_protobuf_proto_path}")
-#message("Protobuf protopath: ${_protobuf_include_path}")
-#message("Protobuf protopath: ${_protobuf_output_path}")
+message("Protobuf protopath: ${_protobuf_proto_path}")
+message("Protobuf protopath: ${_protobuf_include_path}")
+message("Protobuf protopath: ${_protobuf_output_path}")
 
 foreach(file ${proto})
 	get_filename_component(_file_name ${file} NAME_WE)
@@ -52,7 +52,7 @@ foreach(file ${proto})
 		OUTPUT "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.cc" "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.h"
 		COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ${_protobuf_include_path} ${_protobuf_proto_path} ${_protobuf_output_path} ${_abs_file_name}
 		DEPENDS protobuf ${_abs_file_name}
-		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+		WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/lib/stinger/bin
 	)
 
 	set(_generated_files ${_generated_files} "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.cc" "${CMAKE_BINARY_DIR}/stinger_net/proto/${_file_name}.pb.h")
