@@ -24,7 +24,7 @@ target_link_libraries(stinger_simple_communities_updating stinger_net stinger_al
 
 add_subdirectory(spmspv_test)
 
-add_executable(stinger_static_components static_components/src/static_components.c)
+add_executable(stinger_static_components static_components/src/static_components.cpp)
 target_link_libraries(stinger_static_components stinger_net stinger_alg)
 
 add_executable(stinger_test_alg test_alg/src/test_alg.cpp)
@@ -33,7 +33,7 @@ target_link_libraries(stinger_test_alg stinger_net stinger_alg)
 add_executable(stinger_weakly_connected_components weakly_connected_components/src/main.c)
 target_link_libraries(stinger_weakly_connected_components stinger_net stinger_alg)
 
-add_executable(stinger_streaming_connected_components_client streaming_connected_components/src/main.c)
+add_executable(stinger_streaming_connected_components_client streaming_connected_components/src/main.cpp)
 target_link_libraries(stinger_streaming_connected_components_client stinger_net stinger_alg)
 
 add_executable(stinger_graph_partition graph_partition/src/graph_partition.c)

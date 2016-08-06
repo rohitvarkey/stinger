@@ -41,7 +41,11 @@ set(sources
   simple_communities/src/dynamic_simple_communities_updating.cpp
 
   static_components/src/static_components.c
+  static_components/src/dynamic_static_components.cpp
+
   streaming_connected_components/src/streaming_connected_components.c
+  streaming_connected_components/src/dynamic_streaming_connected_components.cpp
+
   weakly_connected_components/src/weakly_connected_components.c
 )
 # Don't include all .h files here, just the ones that contain public definitions
@@ -81,7 +85,11 @@ set(headers
   simple_communities/inc/dynamic_simple_communities_updating.h
 
   static_components/inc/static_components.h
+  static_components/inc/dynamic_static_components.h
+
   streaming_connected_components/inc/streaming_connected_components.h
+  streaming_connected_components/inc/dynamic_streaming_connected_components.h
+
   weakly_connected_components/inc/weakly_connected_components.h
 
   common/inc/streaming_algorithm.h
