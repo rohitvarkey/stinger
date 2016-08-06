@@ -1,13 +1,11 @@
 #include <stdint.h>
 
-#include "stinger_core/stinger.h"
-#include "stinger_core/stinger_error.h"
-#include "stinger_net/stinger_alg.h"
-#include "stinger_net/stinger_alg_client.h"
-#include "stinger_alg/streaming_pagerank.h"
 extern "C" {
 #include "stinger_alg/pagerank.h"
 }
+#include "stinger_alg/dynamic_pagerank.h"
+#include "stinger_net/stinger_alg_client.h"
+
 using namespace gt::stinger;
 
 int

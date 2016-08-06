@@ -1,5 +1,5 @@
 #include "stinger_net/stinger_alg_client.h"
-#include "stinger_alg/streaming_clustering.h"
+#include "stinger_alg/dynamic_clustering.h"
 
 using namespace gt::stinger;
 
