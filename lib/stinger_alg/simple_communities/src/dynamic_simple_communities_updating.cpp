@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stinger_net/stinger_alg.h>
 
 #include "stinger_core/stinger.h"
 #include "stinger_core/xmalloc.h"
@@ -33,7 +34,8 @@ SimpleCommunitiesUpdating::onInit(stinger_registered_alg * alg)
 {
   iter = 0;
   cmap = (int64_t *)alg->alg_data;
-  nv = (stinger_max_active_vertex(alg->stinger))?stinger_max_active_vertex(alg->stinger) + 1:0;
+  //nv = (stinger_max_active_vertex(alg->stinger))?stinger_max_active_vertex(alg->stinger) + 1:0;
+  nv = alg->stinger->max_nv;
 
   const struct stinger * S = alg->stinger;
   if (initial_compute) {
