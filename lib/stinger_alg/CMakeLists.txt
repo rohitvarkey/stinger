@@ -107,4 +107,4 @@ include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
 set_source_files_properties(${config} PROPERTIES GENERATED TRUE)
 add_library(stinger_alg SHARED ${sources} ${headers} ${config})
 target_link_libraries(stinger_alg stinger_core stinger_net stinger_utils compat)
-#target_include_directories(stinger_alg PRIVATE simple_communities/inc)
+
