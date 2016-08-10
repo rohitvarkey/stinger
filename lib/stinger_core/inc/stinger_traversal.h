@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 #include "stinger_internal.h"
+#include <edge_count.h>
 
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_BEGIN
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_END
@@ -133,7 +134,8 @@ extern "C" {
         for(uint64_t i__ = 0; i__ < stinger_eb_high(current_eb__); i__++) {                               \
           if(!stinger_eb_is_blank(current_eb__, i__)) {                                                   \
             struct stinger_edge * current_edge__ = current_eb__->edges + i__;                             \
-            EDGE_FILTER_ {
+            EDGE_FILTER_ {                                                                                \
+              traverse_edge(1);
 
 #define STINGER_GENERIC_FORALL_EDGES_OF_VTX_END()         \
             } /* end EDGE_FILTER_ */                      \
@@ -246,8 +248,8 @@ extern "C" {
         for(uint64_t i__ = 0; i__ < stinger_eb_high(current_eb__); i__++) {                   \
           if(!stinger_eb_is_blank(current_eb__, i__)) {                                       \
             struct stinger_edge * current_edge__ = current_eb__->edges + i__;                 \
-            if (STINGER_IS_OUT_EDGE) {
-
+            if (STINGER_IS_OUT_EDGE) {                                                        \
+              traverse_edge(1);
 #define STINGER_GENERIC_FORALL_EDGES_END()  \
             } /* end if is out edge */      \
           } /* end if eb is blank */        \
@@ -294,8 +296,8 @@ extern "C" {
           if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {                              \
             const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
             if(local_current_edge__.neighbor >= 0) {                                    \
-              EDGE_FILTER_ {
-
+              EDGE_FILTER_ {                                                            \
+                traverse_edge(1);
 #define STINGER_GENERIC_READ_ONLY_FORALL_EDGES_OF_VTX_END() \
               } /* end EDGE_FILTER_ */              \
             } /* end if neighbor exists */          \
@@ -360,8 +362,8 @@ extern "C" {
               if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {                              \
                 const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
                 if(local_current_edge__.neighbor >= 0) {                                    \
-                  EDGE_FILTER_ {
-
+                  EDGE_FILTER_ {                                                            \
+                    traverse_edge(1);
 #define STINGER_GENERIC_READ_ONLY_PARALLEL_FORALL_EDGES_OF_VTX_END() \
                   } /* end EDGE_FILTER_ */              \
                 } /* end if neighbor exists */          \
@@ -424,8 +426,8 @@ extern "C" {
           for(uint64_t i__ = 0; i__ < ebp__[ebp_k__].high; i__++) {     \
             if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {            \
               const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
-              if(local_current_edge__.neighbor >= 0) {
-
+              if(local_current_edge__.neighbor >= 0) { \
+                 traverse_edge(1);
 #define STINGER_READ_ONLY_FORALL_EDGES_END()                            \
               }                                                         \
             }                                                           \
@@ -448,8 +450,8 @@ extern "C" {
           for(uint64_t i__ = 0; i__ < ebp__[ebp_k__].high; i__++) { \
             if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {      \
               const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
-              if(local_current_edge__.neighbor >= 0) {
-
+              if(local_current_edge__.neighbor >= 0) { \
+                traverse_edge(1);
 #define STINGER_READ_ONLY_PARALLEL_FORALL_EDGES_END()                   \
               }                                                   \
             }                                                     \

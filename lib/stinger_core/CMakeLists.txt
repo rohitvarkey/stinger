@@ -38,6 +38,7 @@ publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_core")
 
 include_directories("${CMAKE_BINARY_DIR}/include/stinger_core")
 include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
+include_directories("${CMAKE_SOURCE_DIR}/lib/hooks")
 
 set_source_files_properties(${config} PROPERTIES GENERATED TRUE)
 set_source_files_properties(${unoptimized_sources} PROPERTIES COMPILE_FLAGS -O0)

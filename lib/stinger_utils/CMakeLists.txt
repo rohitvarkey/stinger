@@ -31,6 +31,7 @@ publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_utils")
 
 include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
 include_directories("${CMAKE_BINARY_DIR}/include/stinger_core")
+include_directories("${CMAKE_SOURCE_DIR}/lib/hooks")
 
 # Need to declare an explicit dependency on rapidjson headers, since there's no associated target
 set_source_files_properties("${CMAKE_BINARY_DIR}/include/rapidjson/document.h" GENERATED)
