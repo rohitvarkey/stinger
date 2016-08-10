@@ -28,7 +28,7 @@ ConnectedComponents::onInit(stinger_registered_alg * alg)
 {
     components = (int64_t *)alg->alg_data;
 
-    parallel_shiloach_vishkin_components(alg->stinger, stinger_mapping_nv(alg->stinger), components);
+    parallel_shiloach_vishkin_components(alg->stinger, stinger_max_nv(alg->stinger), components);
 }
 
 void
@@ -40,5 +40,5 @@ ConnectedComponents::onPre(stinger_registered_alg * alg)
 void
 ConnectedComponents::onPost(stinger_registered_alg * alg)
 {
-    parallel_shiloach_vishkin_components(alg->stinger, stinger_mapping_nv(alg->stinger), components);
+    parallel_shiloach_vishkin_components(alg->stinger, stinger_max_nv(alg->stinger), components);
 }

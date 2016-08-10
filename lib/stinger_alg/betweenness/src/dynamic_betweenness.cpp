@@ -57,7 +57,7 @@ BetweennessCentrality::onPre(stinger_registered_alg * alg)
 void
 BetweennessCentrality::onPost(stinger_registered_alg * alg)
 {
-    int64_t nv = (stinger_mapping_nv(alg->stinger))?stinger_mapping_nv(alg->stinger)+1:0;
+    int64_t nv = (stinger_max_nv(alg->stinger))?stinger_max_nv(alg->stinger)+1:0;
     if (nv > 0) {
         if(do_weighted) {
             sample_search(alg->stinger, nv, num_samples, sample_bc, times_found);
