@@ -1,6 +1,6 @@
 #ifndef STINGER_ALGORITHM_CLIENT_H_
 #define STINGER_ALGORITHM_CLIENT_H_
-#include "stinger_alg/streaming_algorithm.h"
+#include "streaming_algorithm.h"
 #include "stinger_net/stinger_alg.h"
 
 namespace gt {
