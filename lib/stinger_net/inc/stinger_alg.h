@@ -75,6 +75,9 @@ typedef struct {
   uint64_t * metadata_lengths;
   void * batch_storage;
   batch_type_t batch_type;
+
+  // Should be updated with stinger_max_active_vertex(stinger) before each batch
+  int64_t max_active_vertex;
 } stinger_registered_alg;
 
 typedef struct {

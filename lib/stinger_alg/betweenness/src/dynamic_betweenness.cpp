@@ -42,9 +42,9 @@ BetweennessCentrality::onInit(stinger_registered_alg * alg)
         sample_bc = (double *)xcalloc(sizeof(double), alg->stinger->max_nv);
     }
 
-    if (stinger_max_active_vertex(alg->stinger) > 0)
+    if (alg->max_active_vertex > 0)
     {
-        sample_search(alg->stinger, stinger_max_active_vertex(alg->stinger) + 1, num_samples, bc, times_found);
+        sample_search(alg->stinger, alg->max_active_vertex + 1, num_samples, bc, times_found);
     }
 }
 
@@ -57,7 +57,7 @@ BetweennessCentrality::onPre(stinger_registered_alg * alg)
 void
 BetweennessCentrality::onPost(stinger_registered_alg * alg)
 {
-    int64_t nv = (stinger_max_nv(alg->stinger))?stinger_max_nv(alg->stinger)+1:0;
+    int64_t nv = alg->max_active_vertex > 0 ? alg->max_active_vertex + 1 : 0;
     if (nv > 0) {
         if(do_weighted) {
             sample_search(alg->stinger, nv, num_samples, sample_bc, times_found);

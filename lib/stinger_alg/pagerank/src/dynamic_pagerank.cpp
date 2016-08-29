@@ -55,9 +55,9 @@ PageRank::onInit(stinger_registered_alg * alg)
       type = stinger_etype_names_lookup_type(alg->stinger, type_str);
     }
     if(type_specified && type > -1) {
-      page_rank_type(alg->stinger, stinger_max_nv(alg->stinger), pr, tmp_pr, epsilon, dampingfactor, maxiter, type);
+      page_rank_type(alg->stinger, alg->max_active_vertex+1, pr, tmp_pr, epsilon, dampingfactor, maxiter, type);
     } else if (!type_specified) {
-      page_rank(alg->stinger, stinger_max_nv(alg->stinger), pr, tmp_pr, epsilon, dampingfactor, maxiter);
+      page_rank(alg->stinger, alg->max_active_vertex+1, pr, tmp_pr, epsilon, dampingfactor, maxiter);
     }
 }
 
@@ -74,7 +74,7 @@ PageRank::onPost(stinger_registered_alg * alg)
     if(type_specified) {
       type = stinger_etype_names_lookup_type(alg->stinger, type_str);
       if(type > -1) {
-        page_rank_type(alg->stinger, stinger_max_nv(alg->stinger), pr, tmp_pr, epsilon, dampingfactor, maxiter, type);
+        page_rank_type(alg->stinger, alg->max_active_vertex, pr, tmp_pr, epsilon, dampingfactor, maxiter, type);
       } else {
         LOG_W_A("TYPE DOES NOT EXIST %s", type_str);
         LOG_W("Existing types:");
@@ -84,7 +84,7 @@ PageRank::onPost(stinger_registered_alg * alg)
         }
       }
     } else {
-      page_rank(alg->stinger, stinger_max_nv(alg->stinger), pr, tmp_pr, epsilon, dampingfactor, maxiter);
+      page_rank(alg->stinger, alg->max_active_vertex, pr, tmp_pr, epsilon, dampingfactor, maxiter);
     }
 }
 
