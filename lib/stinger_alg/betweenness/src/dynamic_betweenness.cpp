@@ -11,6 +11,7 @@ extern "C" {
 #include "stinger_alg/betweenness.h"
 }
 #include "dynamic_betweenness.h"
+#include <dynograph_util.hh>
 
 using namespace gt::stinger;
 
@@ -44,7 +45,13 @@ BetweennessCentrality::onInit(stinger_registered_alg * alg)
 
     if (alg->max_active_vertex > 0)
     {
-        sample_search(alg->stinger, alg->max_active_vertex + 1, num_samples, bc, times_found);
+        sample_search_custom(alg->stinger, alg->max_active_vertex + 1, num_samples, bc, times_found,
+            [](int64_t nv)
+            {
+                static DynoGraph::VertexPicker picker(nv, 0);
+                return picker.next();
+            }
+        );
     }
 }
 
@@ -58,16 +65,29 @@ void
 BetweennessCentrality::onPost(stinger_registered_alg * alg)
 {
     int64_t nv = alg->max_active_vertex > 0 ? alg->max_active_vertex + 1 : 0;
+    DynoGraph::VertexPicker picker(alg->max_active_vertex, 0);
     if (nv > 0) {
         if(do_weighted) {
-            sample_search(alg->stinger, nv, num_samples, sample_bc, times_found);
+            sample_search_custom(alg->stinger, nv, num_samples, sample_bc, times_found,
+                [](int64_t nv)
+                {
+                    static DynoGraph::VertexPicker picker(nv, 0);
+                    return picker.next();
+                }
+            );
 
             OMP("omp parallel for")
             for(int64_t v = 0; v < nv; v++) {
                 bc[v] = bc[v] * old_weighting + weighting* sample_bc[v];
             }
         } else {
-            sample_search(alg->stinger, nv, num_samples, bc, times_found);
+            sample_search_custom(alg->stinger, nv, num_samples, bc, times_found,
+                [](int64_t nv)
+                {
+                    static DynoGraph::VertexPicker picker(nv, 0);
+                    return picker.next();
+                }
+            );
         }
     }
 }
