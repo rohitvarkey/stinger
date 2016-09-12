@@ -14,7 +14,7 @@ namespace gt {
         int64_t *level;
         int64_t source;
     public:
-        BreadthFirstSearch(int64_t source);
+        BreadthFirstSearch();
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();

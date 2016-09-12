@@ -12,6 +12,7 @@ extern "C" {
 #include "stinger_alg/bfs.h"
 }
 #include "dynamic_bfs.h"
+#include <dynograph_util.hh>
 
 using namespace gt::stinger;
 
@@ -24,9 +25,8 @@ BreadthFirstSearch::getDataPerVertex() { return sizeof(int64_t); }
 std::string
 BreadthFirstSearch::getDataDescription() { return "l level"; }
 
-BreadthFirstSearch::BreadthFirstSearch(int64_t sources)
+BreadthFirstSearch::BreadthFirstSearch()
 {
-    this->source = source;
 }
 
 void
@@ -47,6 +47,11 @@ BreadthFirstSearch::onPost(stinger_registered_alg * alg)
     int64_t *marks = (int64_t *)xcalloc(sizeof(int64_t), alg->max_active_vertex);
     int64_t *queue = (int64_t *)xcalloc(sizeof(int64_t), alg->max_active_vertex);
     int64_t *Qhead = (int64_t *)xcalloc(sizeof(int64_t), alg->max_active_vertex);
+
+    // Pick a vertices that has neighbors
+    int64_t source;
+    DynoGraph::VertexPicker picker(alg->max_active_vertex + 1, 0);
+    do { source = picker.next(); } while (stinger_outdegree_get(alg->stinger, source) == 0);
 
     int64_t levels = parallel_breadth_first_search(
             alg->stinger,
