@@ -15,6 +15,18 @@ extern "C" {
 
 using namespace gt::stinger;
 
+void
+BetweennessCentrality::pickSources(stinger_registered_alg * alg) {
+    DynoGraph::VertexPicker rng(alg->max_active_vertex + 1, 0);
+    int64_t v;
+    for (int64_t s = 0; s < num_samples; s++)
+    {
+        // Skip vertices with no neighbors
+        do { v = rng.next(); } while (stinger_outdegree_get(alg->stinger, v) == 0);
+        vertices_to_sample[s] = v;
+    }
+}
+
 std::string
 BetweennessCentrality::getName() { return "betweenness_centrality"; }
 
@@ -25,6 +37,7 @@ std::string
 BetweennessCentrality::getDataDescription() { return "dl bc times_found"; }
 
 BetweennessCentrality::BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted)
+: vertices_to_sample(num_samples)
 {
     this->num_samples = num_samples;
     this->weighting = weighting;
@@ -46,13 +59,7 @@ BetweennessCentrality::onInit(stinger_registered_alg * alg)
 
     if (alg->max_active_vertex > 0)
     {
-        sample_search_custom(alg->stinger, nv, num_samples, bc, times_found,
-            [](int64_t nv)
-            {
-                static DynoGraph::VertexPicker picker(nv, 0);
-                return picker.next();
-            }
-        );
+        sample_search_custom(alg->stinger, nv, vertices_to_sample.size(), vertices_to_sample.data(), bc, times_found);
     }
 }
 
@@ -69,26 +76,14 @@ BetweennessCentrality::onPost(stinger_registered_alg * alg)
     DynoGraph::VertexPicker picker(nv, 0);
 
     if(do_weighted) {
-        sample_search_custom(alg->stinger, nv, num_samples, sample_bc, times_found,
-            [](int64_t nv)
-            {
-                static DynoGraph::VertexPicker picker(nv, 0);
-                return picker.next();
-            }
-        );
+        sample_search_custom(alg->stinger, nv, vertices_to_sample.size(), vertices_to_sample.data(), bc, times_found);
 
         OMP("omp parallel for")
         for(int64_t v = 0; v < nv; v++) {
             bc[v] = bc[v] * old_weighting + weighting* sample_bc[v];
         }
     } else {
-        sample_search_custom(alg->stinger, nv, num_samples, bc, times_found,
-            [](int64_t nv)
-            {
-                static DynoGraph::VertexPicker picker(nv, 0);
-                return picker.next();
-            }
-        );
+        sample_search_custom(alg->stinger, nv, vertices_to_sample.size(), vertices_to_sample.data(), bc, times_found);
     }
 }
 

@@ -100,11 +100,12 @@ int64_t rand_vertex(int64_t nv) { return rand() % nv; }
 
 void sample_search(stinger_t * S, int64_t nv, int64_t nsamples, double * bc, int64_t * found_count)
 {
-    sample_search_custom(S, nv, nsamples, bc, found_count, &rand_vertex);
+    assert(0); // NOT IMPLEMENTED
+    //sample_search_custom(S, nv, nsamples, bc, found_count, &rand_vertex);
 }
 
 void
-sample_search_custom(stinger_t * S, int64_t nv, int64_t nsamples, double * bc, int64_t * found_count, int64_t (*rng)(int64_t))
+sample_search_custom(stinger_t * S, int64_t nv, int64_t nsamples, int64_t * vertices_to_sample, double * bc, int64_t * found_count)
 {
     LOG_V_A("  > Beginning with %ld vertices and %ld samples\n", (long)nv, (long)nsamples);
 
@@ -126,22 +127,11 @@ sample_search_custom(stinger_t * S, int64_t nv, int64_t nsamples, double * bc, i
                 single_bc_search(S, nv, s, partials, found_count);
             }
         } else {
-            // Pick the vertices to be sampled. Call the RNG serially so this is deterministic
-            int64_t *vertices_to_sample = xmalloc(sizeof(int64_t) * nsamples);
-            int64_t v = 0;
-            for (int64_t s = 0; s < nsamples; s++)
-            {
-                // Skip vertices with no neighbors
-                do { v = rng(nv); } while (stinger_outdegree_get(S, v) == 0);
-                vertices_to_sample[s] = v;
-            }
-
             OMP("omp for")
             for(int64_t s = 0; s < nsamples; s++) {
                 int64_t v = vertices_to_sample[s];
                 single_bc_search(S, nv, v, partials, found_count);
             }
-            free(vertices_to_sample);
         }
 
         OMP("omp critical")

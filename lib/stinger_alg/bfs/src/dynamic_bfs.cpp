@@ -16,6 +16,13 @@ extern "C" {
 
 using namespace gt::stinger;
 
+void
+BreadthFirstSearch::pickSource( stinger_registered_alg * alg)
+{
+    DynoGraph::VertexPicker picker(alg->max_active_vertex + 1, 0);
+    do { source = picker.next(); } while (stinger_outdegree_get(alg->stinger, source) == 0);
+}
+
 std::string
 BreadthFirstSearch::getName() { return "bfs"; }
 
@@ -48,11 +55,6 @@ BreadthFirstSearch::onPost(stinger_registered_alg * alg)
     int64_t *marks = (int64_t *)xcalloc(sizeof(int64_t), nv);
     int64_t *queue = (int64_t *)xcalloc(sizeof(int64_t), nv);
     int64_t *Qhead = (int64_t *)xcalloc(sizeof(int64_t), nv);
-
-    // Pick a vertices that has neighbors
-    int64_t source;
-    DynoGraph::VertexPicker picker(nv, 0);
-    do { source = picker.next(); } while (stinger_outdegree_get(alg->stinger, source) == 0);
 
     int64_t levels = parallel_breadth_first_search(
             alg->stinger,

@@ -16,6 +16,8 @@ namespace gt {
     public:
         BreadthFirstSearch();
 
+        void pickSource(stinger_registered_alg * alg);
+
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();
         int64_t getDataPerVertex();

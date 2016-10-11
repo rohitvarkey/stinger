@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <vector>
 #include "stinger_net/stinger_alg.h"
 #include "streaming_algorithm.h"
 namespace gt {
@@ -18,9 +19,13 @@ namespace gt {
         double weighting;
         uint8_t do_weighted;
         double old_weighting;
+
+        std::vector<int64_t> vertices_to_sample;
     public:
         BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted);
         ~BetweennessCentrality();
+
+        void pickSources(stinger_registered_alg * alg);
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();
