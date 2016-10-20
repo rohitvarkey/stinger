@@ -368,6 +368,12 @@ TEST_F(StingerCoreTest, stinger_edge_insertion) {
 TEST_F(StingerCoreTest, stinger_delete_edges) {
   int64_t ret;
 
+  ret = stinger_insert_edge(S, 0, 300, 300, 1, 1);
+
+  EXPECT_EQ(ret, 1);
+
+  ret = stinger_remove_edge(S, 0, 300, 300); //Should go into an infinite loop.
+
   /* Part 1 - Insert edge pair, remove edge pair */
 
   stinger_insert_edge_pair(S, 0, 300, 301, 1, 1);
