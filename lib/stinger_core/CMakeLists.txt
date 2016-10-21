@@ -8,7 +8,7 @@ set(sources
 	src/stinger_shared.c
 	src/stinger_vertex.c
 	src/xmalloc.c
-    src/stinger_batch_insert.cpp)
+        )
 set(headers
 	inc/core_util.h
 	inc/stinger.h
