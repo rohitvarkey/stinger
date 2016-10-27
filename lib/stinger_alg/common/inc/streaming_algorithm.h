@@ -22,6 +22,9 @@ namespace gt {
         virtual void onPre(stinger_registered_alg * alg) = 0;
         // Called after each batch
         virtual void onPost(stinger_registered_alg * alg) = 0;
+
+        // Allows base class destructor to be called polymorphically
+        virtual ~IDynamicGraphAlgorithm() {}
     };
   }
 }
