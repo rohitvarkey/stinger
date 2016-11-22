@@ -8,6 +8,7 @@ set(sources
 	src/stinger_shared.c
 	src/stinger_vertex.c
 	src/xmalloc.c
+	src/x86_full_empty.c
 )
 set(headers
 	inc/core_util.h
@@ -25,9 +26,6 @@ set(headers
 	inc/xmalloc.h
     inc/stinger_batch_insert.h
 )
-set(unoptimized_sources
-	src/x86_full_empty.c
-)
 
 set(config
 	stinger_names.h
@@ -41,7 +39,6 @@ include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
 include_directories("${CMAKE_SOURCE_DIR}/lib/hooks")
 
 set_source_files_properties(${config} PROPERTIES GENERATED TRUE)
-set_source_files_properties(${unoptimized_sources} PROPERTIES COMPILE_FLAGS -O0)
-add_library(stinger_core SHARED ${sources} ${unoptimized_sources} ${headers} ${config})
+add_library(stinger_core SHARED ${sources} ${headers} ${config})
 target_compile_definitions(stinger_core PUBLIC _GLIBCXX_PARALLEL)
 target_link_libraries(stinger_core compat)
