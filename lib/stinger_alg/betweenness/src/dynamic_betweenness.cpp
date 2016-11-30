@@ -11,20 +11,12 @@ extern "C" {
 #include "stinger_alg/betweenness.h"
 }
 #include "dynamic_betweenness.h"
-#include <dynograph_util.hh>
 
 using namespace gt::stinger;
 
 void
-BetweennessCentrality::pickSources(stinger_registered_alg * alg) {
-    DynoGraph::VertexPicker rng(alg->max_active_vertex + 1, 0);
-    int64_t v;
-    for (int64_t s = 0; s < num_samples; s++)
-    {
-        // Skip vertices with no neighbors
-        do { v = rng.next(); } while (stinger_outdegree_get(alg->stinger, v) == 0);
-        vertices_to_sample[s] = v;
-    }
+BetweennessCentrality::setSources(std::vector<int64_t> &sources) {
+    vertices_to_sample = sources;
 }
 
 std::string
@@ -39,7 +31,6 @@ BetweennessCentrality::getDataDescription() { return "dl bc times_found"; }
 BetweennessCentrality::BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted)
 : vertices_to_sample(num_samples)
 {
-    this->num_samples = num_samples;
     this->weighting = weighting;
     old_weighting = 1 - weighting;
     this->do_weighted = do_weighted;
@@ -73,7 +64,6 @@ void
 BetweennessCentrality::onPost(stinger_registered_alg * alg)
 {
     int64_t nv = alg->max_active_vertex + 1;
-    DynoGraph::VertexPicker picker(nv, 0);
 
     if(do_weighted) {
         sample_search_custom(alg->stinger, nv, vertices_to_sample.size(), vertices_to_sample.data(), bc, times_found);

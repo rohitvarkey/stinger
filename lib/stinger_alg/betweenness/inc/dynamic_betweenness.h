@@ -15,7 +15,6 @@ namespace gt {
         double * bc;
         int64_t * times_found;
         double * sample_bc;
-        int64_t num_samples;
         double weighting;
         uint8_t do_weighted;
         double old_weighting;
@@ -25,7 +24,7 @@ namespace gt {
         BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted);
         ~BetweennessCentrality();
 
-        void pickSources(stinger_registered_alg * alg);
+        void setSources(std::vector<int64_t> &sources);
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();

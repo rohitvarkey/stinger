@@ -12,15 +12,13 @@ extern "C" {
 #include "stinger_alg/bfs.h"
 }
 #include "dynamic_bfs.h"
-#include <dynograph_util.hh>
 
 using namespace gt::stinger;
 
 void
-BreadthFirstSearch::pickSource( stinger_registered_alg * alg)
+BreadthFirstSearch::setSource(int64_t v)
 {
-    DynoGraph::VertexPicker picker(alg->max_active_vertex + 1, 0);
-    do { source = picker.next(); } while (stinger_outdegree_get(alg->stinger, source) == 0);
+    source = v;
 }
 
 std::string
