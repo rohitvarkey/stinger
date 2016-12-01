@@ -56,15 +56,17 @@ BreadthFirstSearch::onPost(stinger_registered_alg * alg)
     int64_t *queue = (int64_t *)xcalloc(sizeof(int64_t), nv);
     int64_t *Qhead = (int64_t *)xcalloc(sizeof(int64_t), nv);
 
-    int64_t levels = parallel_breadth_first_search(
-            alg->stinger,
-            nv,
-            source,
-            marks,
-            queue,
-            Qhead,
-            level
-    );
+    for (int i=0;i<1001;i++){
+    	int64_t levels = parallel_breadth_first_search(
+            	alg->stinger,
+            	nv,
+            	i,
+            	marks,
+            	queue,
+            	Qhead,
+            	level
+    	);
+    }
     
     xfree(marks);
     xfree(queue);
