@@ -95,7 +95,7 @@ else ()
     INSTALL_COMMAND $(MAKE) install
   )
 
-  set(PROTOBUF_PROTOC_EXECUTABLE "./protoc")
+  set(PROTOBUF_PROTOC_EXECUTABLE "${CMAKE_BINARY_DIR}/bin/protoc")
 
   add_library(_protobuf_library STATIC IMPORTED)
   add_dependencies(_protobuf_library protobuf)
