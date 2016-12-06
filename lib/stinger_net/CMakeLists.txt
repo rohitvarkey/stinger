@@ -40,9 +40,9 @@ set(_protobuf_proto_path "--proto_path=${CMAKE_CURRENT_LIST_DIR}")
 set(_protobuf_include_path "-I=${CMAKE_SOURCE_DIR}/lib/stinger/lib")
 set(_protobuf_output_path "--cpp_out=${CMAKE_BINARY_DIR}")
 
-message("Protobuf protopath: ${_protobuf_proto_path}")
-message("Protobuf protopath: ${_protobuf_include_path}")
-message("Protobuf protopath: ${_protobuf_output_path}")
+#message("Protobuf protopath: ${_protobuf_proto_path}")
+#message("Protobuf protopath: ${_protobuf_include_path}")
+#message("Protobuf protopath: ${_protobuf_output_path}")
 
 foreach(file ${proto})
 	get_filename_component(_file_name ${file} NAME_WE)
