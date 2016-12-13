@@ -24,7 +24,7 @@ namespace gt {
         BetweennessCentrality(int64_t num_samples, double weighting, uint8_t do_weighted);
         ~BetweennessCentrality();
 
-        void setSources(std::vector<int64_t> &sources);
+        void setSources(const std::vector<int64_t> &sources);
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();

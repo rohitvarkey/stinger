@@ -15,7 +15,7 @@ extern "C" {
 using namespace gt::stinger;
 
 void
-BetweennessCentrality::setSources(std::vector<int64_t> &sources) {
+BetweennessCentrality::setSources(const std::vector<int64_t> &sources) {
     vertices_to_sample = sources;
 }
 
