@@ -39,6 +39,6 @@ include_directories("${CMAKE_BINARY_DIR}/include/stinger_utils")
 include_directories("${CMAKE_SOURCE_DIR}/lib/hooks")
 
 set_source_files_properties(${config} PROPERTIES GENERATED TRUE)
-add_library(stinger_core SHARED ${sources} ${headers} ${config})
+add_library(stinger_core ${sources} ${headers} ${config})
 target_compile_definitions(stinger_core PUBLIC _GLIBCXX_PARALLEL)
 target_link_libraries(stinger_core compat)
