@@ -7,7 +7,11 @@ extern "C" {
 #endif
 
 #include "stinger_internal.h"
-#include <hooks_c.h>
+#ifdef ENABLE_DYNOGRAPH_EDGE_COUNT
+#include <dynograph_edge_count.h>
+#else
+#define DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE()
+#endif
 
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_BEGIN
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_END
@@ -135,7 +139,7 @@ extern "C" {
           if(!stinger_eb_is_blank(current_eb__, i__)) {                                                   \
             struct stinger_edge * current_edge__ = current_eb__->edges + i__;                             \
             EDGE_FILTER_ {                                                                                \
-              hooks_traverse_edges(1);
+              DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 
 #define STINGER_GENERIC_FORALL_EDGES_OF_VTX_END()         \
             } /* end EDGE_FILTER_ */                      \
@@ -249,7 +253,7 @@ extern "C" {
           if(!stinger_eb_is_blank(current_eb__, i__)) {                                       \
             struct stinger_edge * current_edge__ = current_eb__->edges + i__;                 \
             if (STINGER_IS_OUT_EDGE) {                                                        \
-              hooks_traverse_edges(1);
+              DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_GENERIC_FORALL_EDGES_END()  \
             } /* end if is out edge */      \
           } /* end if eb is blank */        \
@@ -296,7 +300,7 @@ extern "C" {
         for(uint64_t i__ = 0; i__ < stinger_eb_high(current_eb__); i__++) {                   \
           if(!stinger_eb_is_blank(current_eb__, i__)) {                                       \
             struct stinger_edge * current_edge__ = current_eb__->edges + i__;                 \
-            hooks_traverse_edges(1);
+            DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_RAW_FORALL_EDGES_OF_ALL_TYPES_END()  \
           } /* end if eb is blank */        \
         } /* end for edges in eb */         \
@@ -320,7 +324,7 @@ extern "C" {
             const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
             if(local_current_edge__.neighbor >= 0) {                                    \
               EDGE_FILTER_ {                                                            \
-                hooks_traverse_edges(1);
+                DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_GENERIC_READ_ONLY_FORALL_EDGES_OF_VTX_END() \
               } /* end EDGE_FILTER_ */              \
             } /* end if neighbor exists */          \
@@ -386,7 +390,7 @@ extern "C" {
                 const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
                 if(local_current_edge__.neighbor >= 0) {                                    \
                   EDGE_FILTER_ {                                                            \
-                    hooks_traverse_edges(1);
+                    DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_GENERIC_READ_ONLY_PARALLEL_FORALL_EDGES_OF_VTX_END() \
                   } /* end EDGE_FILTER_ */              \
                 } /* end if neighbor exists */          \
@@ -450,7 +454,7 @@ extern "C" {
             if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {            \
               const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
               if(local_current_edge__.neighbor >= 0) { \
-                 hooks_traverse_edges(1);
+                 DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_READ_ONLY_FORALL_EDGES_END()                            \
               }                                                         \
             }                                                           \
@@ -474,7 +478,7 @@ extern "C" {
             if(!stinger_eb_is_blank(&ebp__[ebp_k__], i__)) {      \
               const struct stinger_edge local_current_edge__ = ebp__[ebp_k__].edges[i__]; \
               if(local_current_edge__.neighbor >= 0) { \
-                hooks_traverse_edges(1);
+                DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
 #define STINGER_READ_ONLY_PARALLEL_FORALL_EDGES_END()                   \
               }                                                   \
             }                                                     \

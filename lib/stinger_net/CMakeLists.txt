@@ -63,7 +63,6 @@ publish_headers(headers "${CMAKE_BINARY_DIR}/include/stinger_net")
 include_directories("${CMAKE_BINARY_DIR}/")
 include_directories("${CMAKE_BINARY_DIR}/stinger_net")
 include_directories("${CMAKE_BINARY_DIR}/include/stinger_net")
-include_directories("${CMAKE_SOURCE_DIR}/lib/hooks")
 
 set_source_files_properties(${_generated_files} PROPERTIES GENERATED TRUE)
 #message("Files: ${_generated_files}")
