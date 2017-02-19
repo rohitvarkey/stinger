@@ -49,12 +49,14 @@ BreadthFirstSearch::onPre(stinger_registered_alg * alg)
 void
 BreadthFirstSearch::onPost(stinger_registered_alg * alg)
 {
+    int64_t i, levels;
     int64_t nv = alg->max_active_vertex + 1;
     int64_t *marks = (int64_t *)xcalloc(sizeof(int64_t), nv);
     int64_t *queue = (int64_t *)xcalloc(sizeof(int64_t), nv);
     int64_t *Qhead = (int64_t *)xcalloc(sizeof(int64_t), nv);
 
-    int64_t levels = parallel_breadth_first_search(
+    for (i=0;i<=1000;i++){
+        levels = parallel_breadth_first_search(
             alg->stinger,
             nv,
             source,
@@ -62,8 +64,9 @@ BreadthFirstSearch::onPost(stinger_registered_alg * alg)
             queue,
             Qhead,
             level
-    );
-    
+        );
+    }
+
     xfree(marks);
     xfree(queue);
     xfree(Qhead);

@@ -30,7 +30,7 @@ endif()
 
 link_libraries(m)
 
-option(BUILD_SHARED_LIBS "Build libraries as SHARED" OFF)
+option(BUILD_SHARED_LIBS "Build libraries as SHARED" ON)
 
 IF(APPLE)
   # Apple doesn't support librt, using CoreServices instead
