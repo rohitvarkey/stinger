@@ -59,7 +59,7 @@ BreadthFirstSearch::onPost(stinger_registered_alg * alg)
         levels = parallel_breadth_first_search(
             alg->stinger,
             nv,
-            source,
+            i,
             marks,
             queue,
             Qhead,
