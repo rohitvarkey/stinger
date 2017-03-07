@@ -7,11 +7,7 @@ extern "C" {
 #endif
 
 #include "stinger_internal.h"
-#ifdef ENABLE_DYNOGRAPH_EDGE_COUNT
 #include <dynograph_edge_count.h>
-#else
-#define DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE()
-#endif
 
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_BEGIN
 #undef STINGER_FORALL_OUT_EDGES_OF_VTX_END
