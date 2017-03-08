@@ -14,6 +14,8 @@
 #include "xmalloc.h"
 #include "x86_full_empty.h"
 
+#include <dynograph_edge_count.h>
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *
  * ACCESS INTERNAL "CLASSES"
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -1155,6 +1157,7 @@ stinger_update_directed_edge(struct stinger *G,
       endk = tmp->high;
 
       for (k = 0; k < endk; ++k) {
+        DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
         if (dest == (tmp->edges[k].neighbor & (~STINGER_EDGE_DIRECTION_MASK))) {
           int ret = 0;
           if (direction & tmp->edges[k].neighbor) {
@@ -1178,6 +1181,7 @@ stinger_update_directed_edge(struct stinger *G,
         endk = tmp->high;
 
         for (k = 0; k < STINGER_EDGEBLOCKSIZE; ++k) {
+          DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
           int64_t myNeighbor = (tmp->edges[k].neighbor & (~STINGER_EDGE_DIRECTION_MASK));
           if (dest == myNeighbor && k < endk) {
             int ret = 0;

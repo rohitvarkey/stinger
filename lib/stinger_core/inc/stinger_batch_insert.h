@@ -29,6 +29,8 @@
 #include <utility>
 #include <cmath>
 
+#include <dynograph_edge_count.h>
+
 // *** Public interface (definitions at end of file) ***
 template<typename adapter, typename iterator>
 void stinger_batch_incr_edges(stinger_t *G, iterator begin, iterator end);
@@ -259,6 +261,7 @@ protected:
                 endk = tmp->high;
                 // For each edge in the block
                 for (k = 0; k < endk; ++k) {
+                    DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
                     // Mask off direction bits to get the raw neighbor of this edge
                     int64_t dest = (tmp->edges[k].neighbor & (~STINGER_EDGE_DIRECTION_MASK));
                     // Find updates for this destination
@@ -281,6 +284,7 @@ protected:
                     endk = tmp->high;
                     // This time we go past the high water mark to look at the empty edge slots
                     for (k = 0; k < STINGER_EDGEBLOCKSIZE; ++k) {
+                        DYNOGRAPH_EDGE_COUNT_TRAVERSE_EDGE();
                         int64_t myNeighbor = (tmp->edges[k].neighbor & (~STINGER_EDGE_DIRECTION_MASK));
 
                         // Check for edges that were added by another thread since we last checked
