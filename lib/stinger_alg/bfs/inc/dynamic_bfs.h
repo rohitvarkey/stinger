@@ -12,11 +12,12 @@ namespace gt {
     {
     private:
         int64_t *level;
-        int64_t source;
+        std::vector<int64_t> bfs_sources;
+
     public:
         BreadthFirstSearch();
 
-        void setSource(int64_t v);
+        void setSources(const std::vector<int64_t> &sources);
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();
