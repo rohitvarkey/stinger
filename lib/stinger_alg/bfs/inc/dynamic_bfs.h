@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <vector>
 #include "stinger_net/stinger_alg.h"
 #include "streaming_algorithm.h"
 namespace gt {
