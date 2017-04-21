@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <vector>
 #include "stinger_net/stinger_alg.h"
 #include "streaming_algorithm.h"
 namespace gt {
@@ -12,11 +13,12 @@ namespace gt {
     {
     private:
         int64_t *level;
-        int64_t source;
+        std::vector<int64_t> bfs_sources;
+
     public:
         BreadthFirstSearch();
 
-        void setSource(int64_t v);
+        void setSources(const std::vector<int64_t> &sources);
 
         // Overridden from IDynamicGraphAlgorithm
         std::string getName();
